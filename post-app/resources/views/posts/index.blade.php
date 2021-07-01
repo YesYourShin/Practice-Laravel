@@ -5,32 +5,25 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
-	<body>
-	<div class="container">
-		<form action="/posts/store"	method="post">
-			@csrf
-		<div class="form-group">
-		  <label for="title">Title</label>
-		  <input type="text" class="form-control" id="title" name="title"
-		  value="{{ old('title') }}"
-		  >
-		  {{-- // 에러 발생 시 --}}
-		  	@error('title')
-            <div>{{ $message }}</div>
-			@enderror
-
-		</div>
-		<div class="form-group">
-		  <label for="content">Content</label>
-		  <textarea class="form-control" id="content" name="content"></textarea>
-		  {{-- // 에러 발생 시 --}}
-		  	@error('content')
-            <div>{{ $message }}</div>
-			@enderror
-
-		</div>
-		<button type="submit" class="btn btn-primary">Submit</button>
-	  </form>
-	</div>
+<body>
+	<div class="container mt-5 mb-5">
+        <h1>게시글 리스트</h1>
+        <a href="/posts/create" class="btn btn-primary">게시글 작성</a>
+        <ul class="list-group mt-3">
+            @foreach($posts as $post)
+            <li class="list-group-item">
+                <span>Title : {{ $post->title }}</span>
+                <div>
+                    Content : {{ $post->content }}
+                </div>
+                <span>written on {{ $post->created_at }}</span>
+                <hr>
+            </li>
+            @endforeach
+            </ul>
+            <div class="mt-5">
+                {{ $posts->links() }}
+            </div>
+    </div>
 </body>
 </html>
