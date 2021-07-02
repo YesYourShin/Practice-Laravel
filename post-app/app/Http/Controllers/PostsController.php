@@ -8,6 +8,21 @@ use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
+
+    public function __construct() {
+        // 예외 (index, show)
+        $this->middleware(['auth'])->except(['index', 'show']);
+    }
+
+    public function show(Request $request, $id) {
+        // dd($request->page);
+        $page = $request->page;
+        $post = Post::find($id);
+
+        return view('posts.show', compact('post', 'page'));
+
+    }
+
     public function index() {
         // PostsController에 index함수에 내림차순 수정
         // $posts = Post::orderBy('created_at', 'desc')->get();
@@ -18,7 +33,8 @@ class PostsController extends Controller
 
         // 한 페이지에 나오는 개수 설정(latest 붙이면 내림차순)
 		// $posts = Post::paginate(2);
-		$posts = Post::latest()->paginate(2);
+		$posts = Post::latest()->paginate(10);
+        // dd($posts);
 
         return view('posts.index', ['posts'=>$posts]);
     }
@@ -51,6 +67,9 @@ class PostsController extends Controller
         $post->save();
         // 결과 뷰를 반환
         return redirect('/posts/index');
-
+        // $posts = Post::paginate(5);
+        // return view('/posts.index', ['posts'=>$posts]);
+        
+        
     }
 }
