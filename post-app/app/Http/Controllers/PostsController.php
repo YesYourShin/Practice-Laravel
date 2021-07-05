@@ -71,19 +71,30 @@ class PostsController extends Controller
         // File 처리
         // 내가 원하는 파일시스템 상의 위치에 원하는 이름으로
         // 파일을 저장하고
-        $name = $request->file('imageFile')->getClientOriginalName();
-        
-        $extension = $request->file('imageFile')->extension();
-        $nameWithoutExtension = Str::of($name)->basename('.'.$extension);
-        // dd($nameWithoutExtension);
-        // dd($name.'extension:'. $extension);
-        $fileName = $nameWithoutExtension . '_' . time() . '.' . $extension;
-        dd($fileName);
-        // $request->imageFile
-        // 그 파일 이름을
-        // $post->image = $fileName;
+        if($request->file('imageFile')) {
+            $name = $request->file('imageFile')->getClientOriginalName();
+            // $name = 'imageFile.jpg';
 
-        // $post->save();
+            $extension = $request->file('imageFile')->extension();
+            // $extension = 'jpg';
+
+            $nameWithoutExtension = Str::of($name)->basename('.'.$extension);
+            // $nameWithoutExtension = 'imageFile';
+
+            // dd($nameWithoutExtension);
+            // dd($name.'extension:'. $extension);
+            $fileName = $nameWithoutExtension . '_' . time() . '.' . $extension;
+            // $fileName = 'imageFlle'.'_'.'1234567890'.'jpg';
+
+            $request->file('imageFile')->storeAs('images', $fileName);
+            // dd($fileName);
+            // $request->imageFile
+            // 그 파일 이름을
+            $post->image = $fileName;
+
+        }
+        
+        $post->save();
         // 결과 뷰를 반환
         return redirect('/posts/index');
         // $posts = Post::paginate(5);
