@@ -54,7 +54,9 @@ class PostsController extends Controller
         $request->validate([
             // 제목 최소 3자
             'title' => 'required|min:3',
-            'content' => 'required'
+            'content' => 'required',
+
+            'imageFile' => 'image|max:2000'
         ]);
 
         // dd($request);
