@@ -86,7 +86,7 @@ class PostsController extends Controller
             $fileName = $nameWithoutExtension . '_' . time() . '.' . $extension;
             // $fileName = 'imageFlle'.'_'.'1234567890'.'jpg';
 
-            $request->file('imageFile')->storeAs('images', $fileName);
+            $request->file('imageFile')->storeAs('public/images', $fileName);
             // dd($fileName);
             // $request->imageFile
             // 그 파일 이름을
