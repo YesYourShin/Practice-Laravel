@@ -99,7 +99,7 @@ class PostsController extends Controller
         return redirect('/posts/index');
         // $posts = Post::paginate(5);
         // return view('/posts.index', ['posts'=>$posts]);
-        // test
+        
         
     }
 }
