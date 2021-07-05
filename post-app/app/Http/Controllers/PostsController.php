@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class PostsController extends Controller
 {
@@ -66,7 +67,23 @@ class PostsController extends Controller
         $post->title = $title;
         $post->content = $content;
         $post->user_id = Auth::user()->id;
-        $post->save();
+
+        // File 처리
+        // 내가 원하는 파일시스템 상의 위치에 원하는 이름으로
+        // 파일을 저장하고
+        $name = $request->file('imageFile')->getClientOriginalName();
+        
+        $extension = $request->file('imageFile')->extension();
+        $nameWithoutExtension = Str::of($name)->basename('.'.$extension);
+        // dd($nameWithoutExtension);
+        // dd($name.'extension:'. $extension);
+        $fileName = $nameWithoutExtension . '_' . time() . '.' . $extension;
+        dd($fileName);
+        // $request->imageFile
+        // 그 파일 이름을
+        // $post->image = $fileName;
+
+        // $post->save();
         // 결과 뷰를 반환
         return redirect('/posts/index');
         // $posts = Post::paginate(5);
