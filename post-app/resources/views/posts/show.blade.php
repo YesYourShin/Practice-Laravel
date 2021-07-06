@@ -40,7 +40,7 @@
             <input type="text" readonly class="form-control" value="{{ $post->user_id }}">
         
         <div class="flex">
-            <button class="btn btn-warning" onclick="location.href='{{ route('post.edit', ['post'=>$post->id]) }}'">수정</button>
+            <button class="btn btn-warning" onclick="location.href='{{ route('post.edit', ['id'=>$post->id]) }}'">수정</button>
             <button class="btn btn-danger" onclick="location.href='{{ route('post.delete', ['id'=>$post->id]) }}'">삭제</button>
         </div>
         </div>

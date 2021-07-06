@@ -113,11 +113,23 @@ class PostsController extends Controller
         return view('posts.edit')->with('post', $post);
    }
 
-   public function update(Request $request, $id) 
-   {
+    public function update(Request $request, $id) {
+        $request->validate([
+            'title' => 'required|min:3',
+            'content' => 'required',
+            'imageFile' => 'image|max:2000'
+        ]);
 
-   // 게시글을 데이터베이스에서 수정
-   }
+        $post = Post::find($id);
+        // 이미지 파일 수정. 파일시스템에서
+        // 게시글을 데이터베이스에서 수정
+        $post->title=$request->title;
+        $post->content=$request->content;
+        $post->save();
+
+        return redirect()->route('post.show', ['id'=>$id]);
+        
+    }
 
 
    public function destroy($id) {

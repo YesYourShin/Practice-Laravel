@@ -18,7 +18,7 @@
             @foreach($posts as $post)
             <li class="list-group-item">
                 <span>
-                    <a href="{{ route('posts.show', ['id'=>$post->id, 'page'=>$posts->currentPage()]) }}">
+                    <a href="{{ route('post.show', ['id'=>$post->id, 'page'=>$posts->currentPage()]) }}">
                     Title : {{ $post->title }}
                     </a>
                 </span>

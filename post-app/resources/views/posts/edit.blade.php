@@ -36,7 +36,7 @@
 
         </div>
 		<div class="form-group">
-			<label for="file">File</label>
+			<label for="file">File</label><br>
 			<input type="file" id="file" name="imageFile">
 			@error('imageFile')
 				<div>{{ $message }}</div>
