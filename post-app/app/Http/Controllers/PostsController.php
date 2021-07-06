@@ -102,4 +102,27 @@ class PostsController extends Controller
         
         
     }
+
+    public function edit($id) {
+        
+
+        $post = Post::find($id);
+        // $post = Post::where('id', $id)->first();
+        // dd($post);
+        // 수정 폼 생성
+        return view('posts.edit')->with('post', $post);
+   }
+
+   public function update(Request $request, $id) 
+   {
+
+   // 게시글을 데이터베이스에서 수정
+   }
+
+
+   public function destroy($id) {
+       // 파일 시스템에서 이미지 파일 삭제
+       // 게시글을 데이버베이스에서 삭제
+   }
+
 }

@@ -6,7 +6,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
 	<body>
-	<div class="container">
+	<div class="container m-5">
         <div class="m-5">
             <a href="{{ route('posts.index', ['page'=>$page]) }}">목록보기</a>
         </div>
@@ -24,7 +24,7 @@
 		    <label for="imageFile">Post Image</label>
             <div class="my-6 mx-3 w-3/12">
 		        {{-- <img src="/storage/images/{{ $post->image ?? 'no_image_avaliable.png'}}"/> --}}
-                <img class="img-thumbnail" width="20%" src="{{ $post->imagePath()}}"/>
+                <img class="img-thumbnail" width="20%" src="{{ $post->imagePath() }}"/>
             </div>
         </div>
         <div class="form-group">
@@ -38,6 +38,11 @@
         <div class="form-group">
             <label>작성자</label>
             <input type="text" readonly class="form-control" value="{{ $post->user_id }}">
+        
+        <div class="flex">
+            <button class="btn btn-warning" onclick="location.href='{{ route('post.edit', ['post'=>$post->id]) }}'">수정</button>
+            <button class="btn btn-danger" onclick="location.href='{{ route('post.delete', ['id'=>$post->id]) }}'">삭제</button>
+        </div>
         </div>
 	</div>
 </body>
