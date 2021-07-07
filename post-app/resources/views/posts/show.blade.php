@@ -39,21 +39,27 @@
             <label>작성자</label>
             <input type="text" readonly class="form-control" value="{{ $post->user_id }}">
         </div>
-        <div class="flex">
-            <div>
-                <a class="btn btn-warning" 
-                href="{{ route('post.edit', ['post'=>$post->id, 'page'=>$page]) }}">
-                    수정</a>
-            </div>
-            <div>
-            <form action="{{ route('post.delete', ['id'=>$post->id, 'page'=>$page]) }}" method="post">
-            @csrf
-            @method("delete")
-            <button type="submit" class="btn btn-danger" >
-                삭제
-            </button>
-            </div>
-        </div>
+
+        @auth
+            @if(auth()->user()->id == $post->user_id)
+                <div class="flex">
+                    <div>
+                        <a class="btn btn-warning" 
+                            href="{{ route('post.edit', ['post'=>$post->id, 'page'=>$page]) }}">
+                        수정
+                        </a>
+                    </div>
+                    <div>
+                        <form action="{{ route('post.delete', ['id'=>$post->id, 'page'=>$page]) }}" method="post">
+                        @csrf
+                        @method("delete")
+                        <button type="submit" class="btn btn-danger" >
+                        삭제
+                        </button>
+                    </div>
+                </div>
+            @endif
+        @endauth
 	</div>
 </body>
 </html>
