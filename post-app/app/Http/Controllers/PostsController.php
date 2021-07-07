@@ -105,14 +105,14 @@ class PostsController extends Controller
         return $fileName;
     }
 
-    public function edit($id) {
+    public function edit(Request $request, Post $post) {
         
 
-        $post = Post::find($id);
+        // $post = Post::find($id);
         // $post = Post::where('id', $id)->first();
         // dd($post);
         // 수정 폼 생성
-        return view('posts.edit')->with('post', $post);
+        return view('posts.edit', ['post'=>$post, 'page'=>$request->page]);
    }
 
     public function update(Request $request, $id) {
@@ -136,7 +136,7 @@ class PostsController extends Controller
         $post->content=$request->content;
         $post->save();
 
-        return redirect()->route('post.show', ['id'=>$id]);
+        return redirect()->route('post.show', ['id'=>$id, 'page'=>$request->page]);
         
     }
 
