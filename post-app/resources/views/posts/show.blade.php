@@ -41,7 +41,8 @@
         </div>
 
         @auth
-            @if(auth()->user()->id == $post->user_id)
+            {{-- @if(auth()->user()->id == $post->user_id) --}}
+            @can('update', $post)
                 <div class="flex">
                     <div>
                         <a class="btn btn-warning" 
@@ -58,7 +59,8 @@
                         </button>
                     </div>
                 </div>
-            @endif
+            @endcan
+            {{-- @endif --}}
         @endauth
 	</div>
 </body>
