@@ -38,11 +38,21 @@
         <div class="form-group">
             <label>작성자</label>
             <input type="text" readonly class="form-control" value="{{ $post->user_id }}">
-        
-        <div class="flex">
-            <button class="btn btn-warning" onclick="location.href='{{ route('post.edit', ['id'=>$post->id]) }}'">수정</button>
-            <button class="btn btn-danger" onclick="location.href='{{ route('post.delete', ['id'=>$post->id]) }}'">삭제</button>
         </div>
+        <div class="flex">
+            <div>
+                <a class="btn btn-warning" 
+                href="{{ route('post.edit', ['id'=>$post->id]) }}">
+                    수정</a>
+            </div>
+            <div>
+            <form action="{{ route('post.delete', ['id'=>$post->id]) }}" method="post">
+            @csrf
+            @method("delete")
+            <button type="submit" class="btn btn-danger" >
+                삭제
+            </button>
+            </div>
         </div>
 	</div>
 </body>

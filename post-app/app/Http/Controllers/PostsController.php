@@ -141,9 +141,18 @@ class PostsController extends Controller
     }
 
 
-   public function destroy($id) {
+    public function destroy(Request $request, $id) {
        // 파일 시스템에서 이미지 파일 삭제
        // 게시글을 데이버베이스에서 삭제
-   }
+       $post = Post::findOrFail($id);
+       $page = $request->page;
+       if ($post->image) {
+           $imagePath = 'public/images/'.$post->image;
+           Storage::delete($imagePath);
+       }
+       $post->delete();
+
+       return redirect()->route('posts.index', ['page'=>$page]);
+    }
 
 }
