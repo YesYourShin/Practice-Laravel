@@ -29,15 +29,18 @@
         </div>
         <div class="form-group">
             <label>등록일</label>
-            <input type="text" readonly class="form-control" value="{{ $post->created_at->diffForHumans() }}">
+            <input type="text" readonly class="form-control" 
+            value="{{ $post->created_at->diffForHumans() }}">
         </div>
         <div class="form-group">
             <label>수정일</label>
-            <input type="text" readonly class="form-control" value="{{ $post->updated_at }}">
+            <input type="text" readonly class="form-control" 
+            value="{{ $post->updated_at }}">
         </div>
         <div class="form-group">
             <label>작성자</label>
-            <input type="text" readonly class="form-control" value="{{ $post->user->name }}">
+            <input type="text" readonly class="form-control" 
+            value="{{ $post->user->name }}">
         </div>
 
         @auth

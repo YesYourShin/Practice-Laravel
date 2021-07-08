@@ -24,7 +24,8 @@
 		</div>
 		<div class="form-group">
 		  <label for="content">Content</label>
-		  <textarea class="form-control" id="content" name="content">{{ old('content') ? old('conent') : $post->content }}</textarea>
+		  <textarea class="form-control" id="content" name="content">
+              {{ old('content') ? old('conent') : $post->content }}</textarea>
 		  {{-- // 에러 발생 시 --}}
 		  	@error('content')
             <div>{{ $message }}</div>

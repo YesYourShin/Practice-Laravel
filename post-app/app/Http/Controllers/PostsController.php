@@ -171,4 +171,24 @@ class PostsController extends Controller
        return redirect()->route('posts.index', ['page'=>$page]);
     }
 
+    public function myposts() {
+        // PostsController에 index함수에 내림차순 수정
+        // $posts = Post::orderBy('created_at', 'desc')->get();
+        // 또는
+        // $posts = Post::latest()->get();
+
+        // dd($posts[0]->created_at);
+
+        // 한 페이지에 나오는 개수 설정(latest 붙이면 내림차순)
+		
+        // $id = auth()->user()->id;
+		// $posts = Post::where('user_id', $id) ->latest()->paginate(10);
+        
+        $posts = auth()->user()->posts()->latest()->paginate(10);
+        // dd($posts);
+
+        // return view('posts.index', ['posts'=>$posts]);
+        return view('posts.index', compact('posts'));
+    }
+
 }
