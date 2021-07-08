@@ -17,8 +17,9 @@
 		</div>
 		<div class="form-group">
 		    <label for="content">Content</label>
-		    <input class="form-control" id="content" name="content" readonly
-            value="{{ $post->content }}">
+		    <div name="content" id="content" readonly>
+                {!! $post->content !!}
+            </div>
 		</div>
         <div class="form-group">
 		    <label for="imageFile">Post Image</label>
