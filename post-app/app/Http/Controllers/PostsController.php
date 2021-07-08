@@ -185,6 +185,7 @@ class PostsController extends Controller
 		// $posts = Post::where('user_id', $id) ->latest()->paginate(10);
         
         $posts = auth()->user()->posts()->latest()->paginate(10);
+        // $posts = auth()->user()->posts()->orderBy('title', 'asc')->orderBy('created_at', 'desc')->paginate(10);
         // dd($posts);
 
         // return view('posts.index', ['posts'=>$posts]);
