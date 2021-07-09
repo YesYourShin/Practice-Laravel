@@ -23,7 +23,9 @@
 		</div>
 		<div class="form-group">
 		  <label for="content">Content</label>
-		  <textarea class="form-control" id="content" name="content">{{ old('content') }}</textarea>
+		  <textarea class="form-control" id="content" name="content">
+			  {{ old('content') }}
+			</textarea>
 		  {{-- // 에러 발생 시 --}}
 		  	@error('content')
             <div>{{ $message }}</div>
