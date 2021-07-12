@@ -20,9 +20,19 @@ class PostsController extends Controller
         // dd($request->page);
         $page = $request->page;
         $post = Post::find($id);
-        $post->count++; // 조회수 증가시킴
-        $post->save(); // DB에 반영
+        // $post->count++; // 조회수 증가시킴
+        // $post->save(); // DB에 반영
  
+        /*
+        이 글을 조회한 사용자들 중에, 현재
+        로그인한 사용자가 포함되어 있는지를 체크하고
+        포함되어 있지 않으면 추가.
+        포함되어 있으면 다음 단계로 넘어감
+        */
+        if(Auth::user() != null && !$post->viewers->contains(Auth::user())) {
+            $post->viewers()->attach(Auth::user()->id);
+        }
+
         return view('posts.show', compact('post', 'page'));
 
     }
@@ -144,7 +154,7 @@ class PostsController extends Controller
         $post->save();
 
         return redirect()->route('post.show', ['id'=>$id, 'page'=>$request->page]);
-        
+        // return back();
     }
 
 
@@ -186,7 +196,7 @@ class PostsController extends Controller
         // $id = auth()->user()->id;
 		// $posts = Post::where('user_id', $id) ->latest()->paginate(10);
         
-        $posts = auth()->user()->posts()->latest()->paginate(10);
+        $posts = auth()->user()->posts()->latest()->paginate(5);
         // $posts = auth()->user()->posts()->orderBy('title', 'asc')->orderBy('created_at', 'desc')->paginate(10);
         // dd($posts);
 
