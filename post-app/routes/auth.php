@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GithubAuthController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -62,3 +63,6 @@ Route::post('/confirm-password', [ConfirmablePasswordController::class, 'store']
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->middleware('auth')
                 ->name('logout');
+
+Route::get('/github/login', [GithubAuthController::class, 'redirect'])->name('github.login');
+Route::get('/github/callback', [GithubAuthController::class, 'callback']);

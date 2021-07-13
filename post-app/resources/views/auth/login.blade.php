@@ -47,10 +47,22 @@
                     </a>
                 @endif
 
-                <x-button class="ml-3">
+                <x-button class="ml-3">W
                     {{ __('Log in') }}
                 </x-button>
             </div>
         </form>
+        <div class="flex items-center justify-end my-4">
+            <button class="bg-gray-400 ml-2 bg-transparent hover:bg-blue-500 text-black font-bold py-2 px-4 rounded">
+                <a href="{{ route('github.login') }}">Github Login</a>
+            </button>
+            <button class="bg-blue-400 ml-2 bg-transparent hover:bg-blue-500 text-black font-bold py-2 px-4 rounded">
+                <a href="">Google Login</a>
+            </button>
+            <button class="bg-yellow-400 ml-2 bg-transparent hover:bg-blue-500 black font-bold py-2 px-4 rounded">
+                <a href="">Kakao Login</a>
+            </button>
+        </div>
     </x-auth-card>
+        
 </x-guest-layout>

@@ -55,7 +55,7 @@
                         수정
                         </a>
                     </div>
-                    <div>s
+                    <div>
                         <form action="{{ route('post.delete', ['id'=>$post->id, 'page'=>$page]) }}" method="post">
                         @csrf
                         @method("delete")
