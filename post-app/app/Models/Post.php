@@ -10,7 +10,6 @@ class Post extends Model
 
     use HasFactory;
 
-
     public function imagePath() {
         // $path = '/storage/images';
         $path = env('IMAGE_PATH', '/storage/images/');
