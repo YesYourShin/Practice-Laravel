@@ -57,7 +57,7 @@
                 <a href="{{ route('github.login') }}">Github Login</a>
             </button>
             <button class="bg-blue-400 ml-2 bg-transparent hover:bg-blue-500 text-black font-bold py-2 px-4 rounded">
-                <a href="">Google Login</a>
+                <a href="{{ route('google.login') }}">Google Login</a>
             </button>
             <button class="bg-yellow-400 ml-2 bg-transparent hover:bg-blue-500 black font-bold py-2 px-4 rounded">
                 <a href="">Kakao Login</a>

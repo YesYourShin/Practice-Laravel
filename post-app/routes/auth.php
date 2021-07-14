@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\GoogleAuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/register', [RegisteredUserController::class, 'create'])
@@ -66,3 +67,6 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 
 Route::get('/github/login', [GithubAuthController::class, 'redirect'])->name('github.login');
 Route::get('/github/callback', [GithubAuthController::class, 'callback']);
+
+Route::get('/google/login', [GoogleAuthController::class, 'redirect'])->name('google.login');
+Route::get('/google/callback', [GoogleAuthController::class, 'callback']);
