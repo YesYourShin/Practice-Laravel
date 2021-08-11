@@ -36,3 +36,6 @@ Route::put('/posts/{id}', [PostsController::class, 'update'])->name('post.update
 Route::delete('/posts/{id}', [PostsController::class, 'destroy'])->name('post.delete');
 
 Route::get('/char/index', [ChartController::class, 'index']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

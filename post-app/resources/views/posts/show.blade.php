@@ -68,5 +68,14 @@
             {{-- @endif --}}
         @endauth
 	</div>
+    {{-- <div class="form-group"> --}}
+        <label>Comment</label>
+        <div id="app">
+            <comments></comments>
+        </div>
+    {{-- </div> --}}
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="resources/js/comment.vue"></script>
 </body>
 </html>
