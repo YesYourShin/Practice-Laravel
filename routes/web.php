@@ -14,21 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-    // return "Hi";
-});
+Route::resource('/posts', PostsController::class)
+    ->middleware(['auth']);
 
-Route::get('/layout', function () {
-    return view('layouts.app');
-});
+// Route::get('posts', [PostsController::class, 'index'])
+//     ->name('posts.index');
 
-Route::get('/hello', function () {
-    return view('layouts.hello');
-});
+// Route::Post('/posts', [PostsController::class, 'store'])
 
-// Route::get('/posts', [PostsController::Class, 'index']);
-// Route::get('/create', [PostsController::Class, 'create']);
-// Route::post('/store', [PostsController::Class, 'store']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::resource('/posts', PostsController::Class);
+require __DIR__.'/auth.php';
