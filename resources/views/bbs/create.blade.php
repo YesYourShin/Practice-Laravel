@@ -10,15 +10,25 @@
         </div>
     </x-slot>
     <div class="m-4 p-4">
-        <form class="row g-3" method="post" enctype="multipart/form-data">
+        <form class="row g-3" action="{{ route('posts.store') }}"method="post" enctype="multipart/form-data">
             @csrf
             <div class="col-12">
                 <label for="title" class="form-label">제목</label>
-                <input type="text" name="title" class="form-control" id="title" placeholder="제목을 입력하세요.">
+                <input type="text" name="title" class="form-control" id="title" placeholder="제목을 입력하세요." value="{{ old('title') }}">
+                @error('title')
+                <div class="text-red-800">
+                    <span>{{ $message }}</span>
+                </div>
+                @enderror
             </div>
             <div class="col-12">
                 <label for="inputAddress2" class="form-label">글 내용</label>
-                <textarea class="form-control" name="content" id="content" rows="3"></textarea>
+                <textarea class="form-control" name="content" id="content" rows="3" >{{ old('content') }}</textarea>
+                @error('content')
+                <div class="text-red-800">
+                    <span>{{ $message }}</span>
+                </div>
+                @enderror
             </div>
             <div class="col-12">
                 <label for="image" class="form-label">첨부 이미지</label>

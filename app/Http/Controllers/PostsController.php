@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -42,7 +43,29 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title'=>'required',  
+            'content'=>'required|min:3'
+        ]);
+
+        // dd($request->all());
+        $input = array_merge($request->all(), ["user_id"=>Auth::user()->id]);
+
+        /*
+            $request->all() : ['title'=>'asdf', 'content'=>'asdf']
+            ["user_id"=>Auth::user()->id ['user_id=>1]
+            array_merge(["title'=>'asdf', 'content'=>'asdf'],
+                                        ['user_id'=>1])
+        */
+
+        /*
+            input의 내용은 ["title"=>"asdf", 'content"=>"adsf", "user_id"=>1]
+        */
+
+        Post::create($input);
+
+        // return view('bbs.index', ['posts'=>Post::all()]);
+        return redirect()->route('posts.index');
     }
 
     /**

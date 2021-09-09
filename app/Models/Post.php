@@ -9,6 +9,12 @@ class Post extends Model
 {
     use HasFactory; // trait
 
+    protected $fillable = [
+        "title",
+        "content",
+        "user_id"
+    ];
+
     public function writer() {
         /* User <-> Post 의 relationship */
         // 1 : N
