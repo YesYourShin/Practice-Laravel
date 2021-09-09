@@ -22,7 +22,7 @@ Route::resource('/posts', PostsController::class)
 
 // Route::Post('/posts', [PostsController::class, 'store'])
 
-Route::get('/dashboard', function () {
+Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 

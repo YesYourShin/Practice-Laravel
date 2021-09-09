@@ -14,6 +14,7 @@ class PostList extends Component
 
     public $name="홍길동";
     public $posts;
+    
     public function __construct($posts)
     {
         $this->posts = $posts;
