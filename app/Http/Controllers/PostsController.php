@@ -215,4 +215,5 @@ class PostsController extends Controller
 
         return redirect()->route('posts.edit', ['post'=>$post->id]);
     }
+
 }

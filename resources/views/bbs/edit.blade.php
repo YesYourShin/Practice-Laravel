@@ -51,11 +51,20 @@
             </div>
         </form>
         <script>
-            function deleteImage() {
+            // function deleteImage() {
+            //     editForm = document.getElementById('editForm');
+            //     editForm.delete('_method');
+            //     editForm._method = 'delete';
+            //     editForm.action = '/posts/image/{{ $post->id }}';
+            //     editForm.submit();
+            //     return false;
+            // }
+
+            function deleteImage(){
                 editForm = document.getElementById('editForm');
-                editForm.delete('_method');
-                editForm._method = 'delete';
-                editForm.action = '/posts/image/{{ $post->id }}';
+                // editForm.delete('_method');
+                editForm._method.value = 'delete';
+                editForm.action = '/posts/images/{{ $post->id }}/';
                 editForm.submit();
                 return false;
             }
