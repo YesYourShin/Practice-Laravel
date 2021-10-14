@@ -29,6 +29,7 @@ window.Swal = require('sweetalert2')
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('like-button', require('./components/LikeButton.vue').default);
+Vue.component('comment-list', require('./components/CommentList.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
