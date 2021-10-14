@@ -37,7 +37,7 @@
                 <div class="flex items-center">
                     <img class="w-20 h-20 rounded-full" src="{{'/storage/images/'.$post->image}}" 
                         class="card-img-top" alt="my post image">
-                        <button onClick="return deleteImage()" class="btn btn-danger h-10 mx-2 my-2">이미지 삭제</button>
+                        <button onClick="return deleteImage({{ $post->id }})" class="btn btn-danger h-10 mx-2 my-2">이미지 삭제</button>
                     </div>
                     
                 @else
@@ -50,24 +50,6 @@
                 <button type="submit" class="btn btn-primary">글 저장</button>
             </div>
         </form>
-        <script>
-            // function deleteImage() {
-            //     editForm = document.getElementById('editForm');
-            //     editForm.delete('_method');
-            //     editForm._method = 'delete';
-            //     editForm.action = '/posts/image/{{ $post->id }}';
-            //     editForm.submit();
-            //     return false;
-            // }
 
-            function deleteImage(){
-                editForm = document.getElementById('editForm');
-                // editForm.delete('_method');
-                editForm._method.value = 'delete';
-                editForm.action = '/posts/images/{{ $post->id }}/';
-                editForm.submit();
-                return false;
-            }
-        </script>
     </div>
 </x-app-layout>
