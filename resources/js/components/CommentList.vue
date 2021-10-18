@@ -24,6 +24,10 @@ export default {
         getComments() {
             this.comments=['1st comment', '2nd comment',
             '3rd commnet', '4th comment', '5th comment', ]
+            // 서버에 현재 게시글의 댓글 리스트를 비동기적으로 요청
+            // 즉, axios를 이용해서 요청
+            // 서버가 댓글 리스트를 주면 그걸 this.comments에 할당
+
         }
     }
 }

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\LikesController;
 use App\Http\Controllers\PostsController;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +33,7 @@ Route::get('/', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::post('/like/{post}', [LikesController::class, "store"])->middleware(['auth'])->name('like.store');
-
+Route::resource('comments', CommentsController::class);
 
 
 require __DIR__.'/auth.php';
