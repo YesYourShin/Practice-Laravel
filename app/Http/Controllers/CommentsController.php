@@ -29,9 +29,11 @@ class CommentsController extends Controller
     {
         /*
         select * from comments where post_id?
+        order by created_at desc;
         */
 
-        $comments = Comment::where('post_id', $postId);
+        $comments = Comment::where('post_id', $postId)->latest();
+        return $comments;
     }
 
     /**
