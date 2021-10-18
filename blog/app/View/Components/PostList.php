@@ -11,9 +11,12 @@ class PostList extends Component
      *
      * @return void
      */
-    public function __construct()
+
+    public $name = "홍길동";
+    public $posts;
+    public function __construct($posts)
     {
-        //
+        $this->posts = $posts;
     }
 
     /**
