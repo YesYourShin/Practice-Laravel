@@ -19,6 +19,18 @@ class CreateCommentsTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('post_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+            /*
+                create table comments (
+                    id biginteger primary key,
+                    comment varchar(255),
+                    user_id biginteger
+                        references id on users on delete cascade,
+                    post_id biginteger
+                        references id on posts on delete cascade,
+                        created_at datetime,
+                        updated_at datetime
+                )
+            */
         });
     }
 
