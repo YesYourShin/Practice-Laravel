@@ -35,5 +35,12 @@ Route::get('/', function () {
 Route::post('/like/{post}', [LikesController::class, "store"])->middleware(['auth'])->name('like.store');
 Route::resource('comments', CommentsController::class);
 
+Route::post('/comments/{postId}', [CommentsController::class, 'store']);
+
+Route::get('/comments/{postId}', [CommentsController::class, 'index']);
+
+Route::patch('/comments/{commentId}', [CommentsController::class, 'update']);
+
+Route::delete('/comments/{commentId}', [CommentsController::class, 'destroy']);
 
 require __DIR__.'/auth.php';

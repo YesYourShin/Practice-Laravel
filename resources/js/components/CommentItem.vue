@@ -1,5 +1,5 @@
 <template>
-    <div>
+
 <div x-data="{ open1: false, open2: false }">
   <div class="h-screen bg-gray-100 flex justify-center items-center">
     <div class="bg-white w-full sm:max-w-7xl md:w-1/3 h-auto shadow px-3 py-2 flex flex-col space-y-2">

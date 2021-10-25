@@ -32,8 +32,35 @@ class CommentsController extends Controller
         order by created_at desc;
         */
 
-        $comments = Comment::where('post_id', $postId)->latest();
+        $comments = Comment::where('post_id', $postId)->latest()->get();
+
         return $comments;
+    }
+
+    // 댓글 등록
+    public function store(Request $request, $postId) {
+        /*  첫 번째 방법
+            Comment 객체를 생성하고,
+            이 객체의 멤버변수(프로퍼티)를 설정하고
+            save();
+            두 번째 방법
+            Comment::create([]);
+        */
+        
+        // validation check
+        $request->validate(['comment' => 'required']);
+
+        // $request->validate(['email'=>'required|email|unique:comments'])
+        // this->validate($request, ['comment' => 'required']);
+
+        // create에 사용할 수 있는 칼럼들은
+        // Eloquent 모델 클래스에 protected $fillable에 명시되어 있어야 한다.
+        // 
+        Comment::create([
+            'comment'=> $request -> input('comment'),
+            'user_id'=> auth()->user()->id, // 로그인한  사용자의 id
+            'post_id'=> $postId,
+        ]);
     }
 
     /**
@@ -52,10 +79,6 @@ class CommentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -86,9 +109,19 @@ class CommentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $commentId)
     {
-        //
+        //validation check
+        $request->validate(['comment' => 'required']);
+        // update할 레코드를 먼저 찾고, 그 다음 update
+        // select * from comments where id = ?
+        $comment = Comment::find($commentId);
+        // update comments set comment=? updated_at=now() where id = ?
+        $comment->update([
+            'comment'=> $request -> input('comment'),
+        ]);
+
+        return $comment;
     }
 
     /**
@@ -99,6 +132,17 @@ class CommentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        /*
+            comments 테이블에서 id가 $commentId인 레코드를 삭제
+            1. RAW query
+            2. DB Query Builder
+            3. Eloquent
+        */
+        // delete from comments where id = ?
+        $comment = comment::find($commentId);
+
+        // delete from comments where id = ?
+        
+        $comment::delete();
     }
 }
