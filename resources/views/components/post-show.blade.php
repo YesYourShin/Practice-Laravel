@@ -29,7 +29,7 @@
               action="{{ route('posts.destroy', ['post'=>$post->id]) }}">
             @csrf
             @method('delete')
-            {{-- <input type="hidden" name="_method" value="delete"> --}}
+            <input type="hidden" name="_method" value="delete">
             <button  type="submit">삭제하기</button>
           </form>
         </div>
