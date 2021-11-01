@@ -32,7 +32,7 @@ class CommentsController extends Controller
         order by created_at desc;
         */
 
-        $comments = Comment::where('post_id', $postId)->latest()->get();
+        $comments = Comment::with('user')->where('post_id', $postId)->latest()->get();
         // dd($comments);
         return $comments;
     }
