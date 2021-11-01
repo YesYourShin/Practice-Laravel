@@ -33,7 +33,7 @@ Route::get('/', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::post('/like/{post}', [LikesController::class, "store"])->middleware(['auth'])->name('like.store');
-Route::resource('comments', CommentsController::class);
+// Route::resource('comments', CommentsController::class);
 
 Route::post('/comments/{postId}', [CommentsController::class, 'store']);
 

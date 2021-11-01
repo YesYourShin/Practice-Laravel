@@ -33,7 +33,7 @@ class CommentsController extends Controller
         */
 
         $comments = Comment::where('post_id', $postId)->latest()->get();
-
+        // dd($comments);
         return $comments;
     }
 

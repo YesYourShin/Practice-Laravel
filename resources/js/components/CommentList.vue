@@ -26,7 +26,6 @@ export default {
             // 즉, axios를 이용해서 요청
             // 서버가 댓글 리스트를 주면 그놈을 어디에 할당해?
             // this.comments에 할당.
-
             axios.get('/comments/'+this.post.id)
             .then(response=>{
                 // console.log(response);
