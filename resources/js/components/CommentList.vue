@@ -1,24 +1,66 @@
 <template>
     <div>
+            <label class="block text-left" style="max-width: 400px">
+      <button @click="addComment" class="text-gray-700">댓글 등록</button>
+      <textarea
+        v-model="newComment"
+        class="form-textarea mt-1 block w-full"
+        rows="3"
+        placeholder="Enter some comment."
+      ></textarea>
+    </label>
+
+
         <button @click="getComments"
             class="btn btn-default">댓글 불러오기</button>
-        <comment-item v-for="(comment, index) in comments"
+
+        <comment-item v-for="(comment, index) in comments.data"
                 :key="index" :comment="comment"/>
+        <!-- {{ comments.links }} -->
+
+        <pagination @pageClicked="getPage($event)"
+            v-if="comments.links != null" :links="comments.links"/>
     </div>
 </template>
 
 <script>
 import CommentItem from './CommentItem.vue';
+import Pagination from './Pagination.vue';
 export default {
     props: ['post', 'loginuser'],
-    components: {CommentItem},
-    data() {
+    components: {CommentItem, Pagination},
+    data() {    
         return {
             comments : [],
+            newComment : '',
         }
     },
 
     methods: {
+        addComment() {
+            if(this.newComment == '') {
+                alert('한자라도 써라');
+                return;
+            }
+            axios.post('/comments/'+this.post.id, 
+                {'comment' : this.newComment})
+                .then(response=>{
+                    // console.log(response.data);
+                    this.getComments();
+                    this.newComment='';
+                })
+                .catch(error=>{console.log(error)})
+        },
+        getPage(url) {
+            console.log(url);
+            axios.get(url)
+            .then(response=>{
+                this.comments = response.data;
+            })
+            .catch(error=>{
+                console.log(error);
+            });
+        },
         getComments() {
             // this.comments=['1st comment', '2nd comment',
             //     '3rd comment', '4th comment', '5th comment'];
