@@ -27,15 +27,15 @@
               </div>
             <div class="flex justify-start items-center text-xs w-full">
               <div class="font-semibold text-gray-700 px-2 flex items-center justify-center space-x-1">
-                <a href="#" class="hover:underline">
-                  <small>Like</small>
+                <a href="#" class="hover:underline" v-if="comment.user_id==login_user_id">
+                  <small>Update</small>
                 </a>
                <small class="self-center">.</small>
-                <a href="#" class="hover:underline">
-                  <small>Reply</small>
+                <a href="#" class="hover:underline" v-if="comment.user_id==login_user_id">
+                  <small>Delete</small>
                 </a>
                <small class="self-center">.</small>
-                <a href="#" class="hover:underline">
+                <a href="#" class="hover:underline" v-if="comment.user_id==login_user_id">
                   <small>15 hour</small>
                 </a>
               </div>
@@ -53,6 +53,6 @@
 
 <script>
 export default {
-    props: ['comment'],
+    props: ['comment', 'login_user_id'],
 }
 </script>

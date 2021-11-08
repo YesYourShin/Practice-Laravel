@@ -15,7 +15,8 @@
             class="btn btn-default">댓글 불러오기</button>
 
         <comment-item v-for="(comment, index) in comments.data"
-                :key="index" :comment="comment"/>
+                :key="index" :comment="comment"
+                :login_user_id="loginuser"/>
         <!-- {{ comments.links }} -->
 
         <pagination @pageClicked="getPage($event)"
