@@ -1,26 +1,24 @@
 <template>
     <div>
-            <label class="block text-left" style="max-width: 400px">
-      <button @click="addComment" class="text-gray-700">댓글 등록</button>
-      <textarea
-        v-model="newComment"
-        class="form-textarea mt-1 block w-full"
-        rows="3"
-        placeholder="Enter some comment."
-      ></textarea>
-    </label>
-
+        <label class="block text-left" style="max-width: 400px">
+            <button @click="addComment" class="text-gray-700">댓글등록</button>
+            <textarea v-model="newComment"
+                class="form-textarea mt-1 block w-full"
+                rows="3"
+                placeholder="Enter some comment."
+            ></textarea>
+        </label>
 
         <button @click="getComments"
             class="btn btn-default">댓글 불러오기</button>
 
         <comment-item v-for="(comment, index) in comments.data"
                 :key="index" :comment="comment"
-                :login_user_id="loginuser"/>
-        <!-- {{ comments.links }} -->
+                :login_user_id="loginuser"
+                @deleted="getComments" />
 
-        <pagination @pageClicked="getPage($event)"
-            v-if="comments.links != null" :links="comments.links"/>
+        <pagination  @pageClicked="getPage($event)"
+                v-if="comments.links != null" :links="comments.links"/>
     </div>
 </template>
 
@@ -30,7 +28,7 @@ import Pagination from './Pagination.vue';
 export default {
     props: ['post', 'loginuser'],
     components: {CommentItem, Pagination},
-    data() {    
+    data() {
         return {
             comments : [],
             newComment : '',
@@ -40,27 +38,29 @@ export default {
     methods: {
         addComment() {
             if(this.newComment == '') {
-                alert('한자라도 써라');
+                alert('한자라도 써라 꺄..');
                 return;
             }
-            axios.post('/comments/'+this.post.id, 
-                {'comment' : this.newComment})
-                .then(response=>{
-                    // console.log(response.data);
-                    this.getComments();
-                    this.newComment='';
-                })
-                .catch(error=>{console.log(error)})
+            axios.post('/comments/'+this.post.id,
+                    {'comment':this.newComment})
+                    .then(response=>{
+                        // console.log(response.data);
+
+                        this.getComments();
+                        this.newComment='';
+                    })
+                    .catch(error=>{console.log(error)})
         },
         getPage(url) {
             console.log(url);
             axios.get(url)
-            .then(response=>{
-                this.comments = response.data;
-            })
-            .catch(error=>{
-                console.log(error);
-            });
+                .then(response=>{
+                    // console.log(response);
+                    this.comments = response.data;
+                })
+                .catch(error=>{
+                    console.log(error);
+                });
         },
         getComments() {
             // this.comments=['1st comment', '2nd comment',
