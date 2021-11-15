@@ -12,8 +12,8 @@
         <button @click="getComments"
             class="btn btn-default">댓글 불러오기</button>
 
-        <comment-item v-for="(comment, index) in comments.data"
-                :key="index" :comment="comment"
+        <comment-item v-for="comment in comments.data"
+                :key="comment.id" :comment="comment"
                 :login_user_id="loginuser"
                 @deleted="getComments" />
 
@@ -47,7 +47,14 @@ export default {
                         // console.log(response.data);
 
                         this.getComments();
-                        this.newComment='';
+                        this.newComment=this.comments;
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Your work has been added',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                     })
                     .catch(error=>{console.log(error)})
         },

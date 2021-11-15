@@ -76,6 +76,13 @@ export default {
                 .then(response=>{
                     // console.log(response.data);
                     // this.$emit('deleted');
+                    Swal.fire({
+                      position: 'top-end',
+                      icon: 'success',
+                      title: 'Your work has been deleted',
+                      showConfirmButton: false,
+                      timer: 1500
+                    })
                     this.$parent.getComments();
                 })
                 .catch(error=>{
@@ -87,7 +94,36 @@ export default {
           this.updateClicked = true;
         },
         updateComment() {
-          $('#comment'+this.comment.id).attr('readonly', false);
+          if (this.newComment == '') {
+            alert("한자라도 써라잉");
+            return;
+          }
+          // axios.patch(url, data);
+          axios.patch('/comments/'+this.comment.id, 
+            {'comment' : this.newComment}
+          ).then(response => {
+            console.log(response.status);
+            console.log(response.data);
+            this.updateClicked = false;
+            // alert('댓글 수정 성공');
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Your work has been updated',
+                showConfirmButton: false,
+                timer: 1500
+                })
+          })
+          .catch(error => {
+            // console.log(error);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'fail',
+                title: 'Your work has not been saved',
+                showConfirmButton: false,
+                timer: 1500
+                })
+          });
         }
     },
 }
