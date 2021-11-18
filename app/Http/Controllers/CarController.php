@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')
+            ->except(['show', 'index']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,15 @@ class CarController extends Controller
      */
     public function index()
     {
-        //
+        /*
+            1. DB에서 리스트를 가져온다
+            2. 그 리스트를 블레이드 컴포넌트에게 전달한다.
+        */
+        // $cars = Car::all();
+        // select * from cars order by created_at desc;
+        // $cars = Car::orderBy('created_at', 'desc')->get();
+        $cars = Car::latest()->get();
+        return view('components.cars.index', ['cars'=>$cars]);
     }
 
     /**
