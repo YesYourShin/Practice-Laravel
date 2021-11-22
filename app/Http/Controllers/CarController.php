@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 
 class CarController extends Controller
 {
@@ -11,7 +11,7 @@ class CarController extends Controller
     public function __construct()
     {
         $this->middleware('auth')
-            ->except(['show', 'index']);
+            ->except(['index', 'show']);
     }
     /**
      * Display a listing of the resource.
@@ -27,7 +27,9 @@ class CarController extends Controller
         // $cars = Car::all();
         // select * from cars order by created_at desc;
         // $cars = Car::orderBy('created_at', 'desc')->get();
-        $cars = Car::latest()->get();
+        // dd(Request::all());
+        $cars = Car::latest()->paginate(5);
+        // dd($cars);
         return view('components.cars.index', ['cars'=>$cars]);
     }
 
@@ -38,7 +40,7 @@ class CarController extends Controller
      */
     public function create()
     {
-        //
+        return view('components.cars.register-car');
     }
 
     /**

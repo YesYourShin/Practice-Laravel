@@ -14,9 +14,14 @@ class CarFactory extends Factory
      */
     public function definition()
     {
-        $c = new Company();
-        $c -> name = 'Hyundai';
-        $c -> save();
+        $c = null;
+        if(Company::all()->count() == 0) {
+            $c = new Company();
+            $c -> name = 'Hyundai';
+            $c -> save();    
+        } else {
+            $c = Company::first();
+        }
         
         return [
             'image'=> $this->faker->name(),
