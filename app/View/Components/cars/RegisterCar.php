@@ -11,9 +11,12 @@ class RegisterCar extends Component
      *
      * @return void
      */
-    public function __construct()
+
+    public $companies;
+
+    public function __construct($companies)
     {
-        //
+        $this->companies = $companies;
     }
 
     /**

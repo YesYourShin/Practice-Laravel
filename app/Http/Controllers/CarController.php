@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
-use Illuminate\Support\Facades\Request;
+use App\Models\Company;
+use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
@@ -40,7 +41,8 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view('components.cars.register-car');
+        $companies = Company::all();
+        return view('components.cars.register-car', ["companies"=>$companies]);
     }
 
     /**
@@ -51,7 +53,28 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        // 1. 자동차 정보 저장에 필요한 데이터가 모두, 그리고 적절한 형태로 왔는지 정당성검사를 수행하자.
+        $now = now();
+        $now->year;
+        $data = $request->validate([
+            'image'=>'required|image',
+            'name'=>'required',
+            'company_id'=>'required',
+            'year'=>'required|numeric|min:1800|max:'.($now->year+1),
+            'price'=>'required|numeric|min:1',
+            'type'=>'required',
+            'style'=>'required',
+        ]);
+
+        // 2. 이미지를 파일 시스템의 특정 위치에 저장한다.
+
+        // 3. 요청정보에서($request) 필요한 데이터를 꺼내가지고 DB에 저장한다.
+        Car::create($data);
+
+        // 3. 
+        
+        return redirect()->route('cars.index');
     }
 
     /**
