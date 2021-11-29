@@ -56,7 +56,6 @@ class CarController extends Controller
         // dd($request->all());
         // 1. 자동차 정보 저장에 필요한 데이터가 모두, 그리고 적절한 형태로 왔는지 정당성검사를 수행하자.
         $now = now();
-        $now->year;
         $data = $request->validate([
             'image'=>'required|image',
             'name'=>'required',
@@ -68,8 +67,11 @@ class CarController extends Controller
         ]);
 
         // 2. 이미지를 파일 시스템의 특정 위치에 저장한다.
-
+        $path = $request->image->store('images', 'public');
+        // dd($path);
         // 3. 요청정보에서($request) 필요한 데이터를 꺼내가지고 DB에 저장한다.
+        $data = array_merge($data, ['image'=>$path]);
+        // dd($data);
         Car::create($data);
 
         // 3. 
@@ -85,7 +87,9 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        //
+        
+        // 상세보기 페이지
+        return view('components.cars.car-show', compact('car'));
     }
 
     /**
