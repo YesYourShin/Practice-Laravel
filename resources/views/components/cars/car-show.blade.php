@@ -30,7 +30,21 @@
             <label for="style">외형: </label>
             <input readonly value="{{ $car->style }}" type="text" id="style" name="style">
         </div>
-        <button class="my-4 px-2 py-2 bg-blue-400 rounded shadow text-white">등록</button>
+        <button class="my-4 px-2 py-2 bg-blue-400 rounded shadow text-white">
+            <a href="{{ route('cars.index') }}">
+                목록보기
+            </a>
+        </button>
+        <button class="my-4 px-2 py-2 bg-green-400 rounded shadow text-white">
+            <a href="{{ route('cars.edit', ['car'=>$car->id]) }}">
+                수정
+            </a>
+        </button>
+        <button class="my-4 px-2 py-2 bg-red-400 rounded shadow text-white">
+            <a href="{{ route('cars.destroy', ['car'=>$car->id]) }}">
+                삭제
+            </a>
+        </button>
     </div>
 </div>
 </x-guest-layout>
